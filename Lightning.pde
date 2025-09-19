@@ -3,13 +3,14 @@ void setup() {
   frameRate(60);
 }
 
+//Distance between duelists
+int distance = 1000;
+
 // Parameters for bolts
 int miniChange = 50;
 int range = 100;
 int xIncrement = 50;
-
-//Distance between duelists
-int distance = 1400;
+int limit = distance/2 + 100;
 
 // Note: I have no clue how to make it so variable names can be composed of variable strings...
 // so copy and pasting it is!
@@ -67,11 +68,17 @@ int distance = 1400;
   
 
 void draw() {
-  background(0,0,0);
+  background(85,95,148);
   
   // 3D Manuever
   translate(500,500);
-  rotateX(-(mouseY-500)*PI*1/500);
+  int y;
+  if (mouseY > 400) {
+    y = mouseY;
+  } else {
+    y = 400;
+  }
+  rotateX(-(y-500)*PI*1/1100);
   rotateY((mouseX-500)*PI*1/500);
   noStroke();
   
@@ -79,9 +86,9 @@ void draw() {
     stroke(41,171,226);
     strokeWeight(15);
     if (left) {
-      go = xs1 < 800;
+      go = xs1 < limit;
     } else {
-      go = xs1 > -800;
+      go = xs1 > -limit;
     }
     
     if (go) {
@@ -153,6 +160,46 @@ void draw() {
       zs7 = zf7;
     }
   
+  decorate();
+}
+
+void mousePressed() {
+  
+    left =!left;
+    if (left) {
+      xs1 = -distance/2 + 230;
+      xs2 = -distance/2 + 230;
+      xs3 = -distance/2 + 230;
+      xs4 = -distance/2 + 230;
+      xs5 = -distance/2 + 230;
+      xs6 = -distance/2 + 230;
+      xs7 = -distance/2 + 230;
+    } else {
+      xs1 = distance/2 - 230;
+      xs2 = distance/2 - 230;
+      xs3 = distance/2 - 230;
+      xs4 = distance/2 - 230;
+      xs5 = distance/2 - 230;
+      xs6 = distance/2 - 230;
+      xs7 = distance/2 - 230;
+    }
+    ys1 = 100;
+    zs1 = 0;
+    ys2 = 100;
+    zs2 = 0;
+    ys3 = 100;
+    zs3 = 0;
+    ys4 = 100;
+    zs4 = 0;
+    ys5 = 100;
+    zs5 = 0;
+    ys6 = 100;
+    zs6 = 0;
+    ys7 = 100;
+    zs7 = 0;
+}
+
+void decorate() {
   // Creating wizards
   stroke(255,255,255);
   noStroke();
@@ -220,45 +267,15 @@ void draw() {
       translate(0,0,1);
     }
   popMatrix();
-}
-
-void mousePressed() {
-  /*Notes
-    right wand = (270,100,0);
-    left wand = (-270,100,0);
-  */  
-    left =!left;
-    if (left) {
-      xs1 = -270;
-      xs2 = -270;
-      xs3 = -270;
-      xs4 = -270;
-      xs5 = -270;
-      xs6 = -270;
-      xs7 = -270;
-    } else {
-      xs1 = 270;
-      xs2 = 270;
-      xs3 = 270;
-      xs4 = 270;
-      xs5 = 270;
-      xs6 = 270;
-      xs7 = 270;
-    }
-    ys1 = 100;
-    zs1 = 0;
-    ys2 = 100;
-    zs2 = 0;
-    ys3 = 100;
-    zs3 = 0;
-    ys4 = 100;
-    zs4 = 0;
-    ys5 = 100;
-    zs5 = 0;
-    ys6 = 100;
-    zs6 = 0;
-    ys7 = 100;
-    zs7 = 0;
+  
+  translate (-distance/2,0,0);
+  
+  pushMatrix(); 
+    rotateX(PI/2);
+    translate(0,0,-400);
+    rect(-2500,-300,5000,600);
+    
+  popMatrix();
 }
 
 // Source: apex_nd on processing.org forums
