@@ -1,16 +1,16 @@
 void setup() {
-  size(1000,1000, P3D);
+  size(1500,1000, P3D);
   frameRate(60);
 }
 
 //Distance between duelists
-int distance = 1000;
+int distance = 1300;
 
 // Parameters for bolts
 int miniChange = 50;
 int range = 100;
 int xIncrement = 50;
-int limit = distance/2 + 100;
+int limit = distance/2 + 2000;
 
 // Note: I have no clue how to make it so variable names can be composed of variable strings...
 // so copy and pasting it is!
@@ -71,15 +71,15 @@ void draw() {
   background(85,95,148);
   
   // 3D Manuever
-  translate(500,500);
+  translate(750,500);
   int y;
-  if (mouseY > 400) {
+  if (mouseY > 300) {
     y = mouseY;
   } else {
-    y = 400;
+    y = 300;
   }
-  rotateX(-(y-500)*PI*1/1100);
-  rotateY((mouseX-500)*PI*1/500);
+  rotateX(-(y-500)*PI*1/1500);
+  rotateY((mouseX-750)*PI*1/500);
   noStroke();
   
   //Lightning!
@@ -200,6 +200,10 @@ void mousePressed() {
 }
 
 void decorate() {
+  lights();
+  ambientLight(125,45,45);
+  directionalLight(255,255,255,0,0,1);
+  
   // Creating wizards
   stroke(255,255,255);
   noStroke();
@@ -207,8 +211,8 @@ void decorate() {
   fill(255,220,50);
   translate(-distance/2,0);
   sphere(100);
-  fill(100,100,100);
-  stroke(150,150,150);
+  fill(50,50,50);
+  stroke(10,10,10);
   // Following function is not mine; check function declaration for source  
   cylinder(100,20,400,10);
   pushMatrix();
@@ -240,8 +244,8 @@ void decorate() {
   translate(distance,0);
   fill(255,220,50);
   sphere(100);
-  fill(100,100,100);
-  stroke(150,150,150);
+  fill(50,50,50);
+  stroke(10,10,10);
   cylinder(100,20,400,10);
   pushMatrix();
     noStroke();
@@ -268,13 +272,66 @@ void decorate() {
     }
   popMatrix();
   
+  
+  // Making the background
   translate (-distance/2,0,0);
+  
+  pushMatrix();
+    fill(255, 89, 89);
+    translate(3000,-1600,-4000);
+    sphere(200);
+  popMatrix();
   
   pushMatrix(); 
     rotateX(PI/2);
-    translate(0,0,-400);
+    translate(0,0,-402);
+    fill(80, 40, 10);
     rect(-2500,-300,5000,600);
+    translate(0,0,-200);
+    fill (150,150,150);
+    rect(-3000,-2500,6000,5000);
+  popMatrix();
+  
+  pushMatrix();
+    fill(80, 40, 10);
+    translate(0,0,-200);
+    rect(-2500,402,5000,200);
+    translate(0,0,400);
+    rect(-2500,402,5000,200);
+  popMatrix();
+  
+  pushMatrix();
+    translate(0,0,-2500);
+    fill(75,75,75);
+    rect(-3000,-100,6000,700);
+    for(int i = 0; i < 6; i++) {
+      rect(-3000 + i*1080, -2000,600,1900);
+    }
+    translate(0,0,5000);
+    rect (-3000,-100,6000,700);
+    for(int i = 0; i < 6; i++) {
+      rect(-3000 + i*1080, -2000,600,1900);
+    }
+  popMatrix();
+  pushMatrix();
+    rotateY(PI/2);
+    translate(0,0,-3000);
+    rect(-2500,-7000,5000,11000);
     
+    translate(0,0,6000);
+    rect(-2500,-7000,5000,11000);
+  popMatrix();
+  
+  pushMatrix();
+    rotateX(0.588);
+    translate(0,0,3205);
+    rect(-3000,-4807.5, 6000,4807.5);
+  popMatrix();
+  pushMatrix();
+    rotateY(PI);
+    rotateX(0.588);
+    translate(0,0,3205);
+    rect(-3000,-4807.5, 6000,4807.5);
   popMatrix();
 }
 
