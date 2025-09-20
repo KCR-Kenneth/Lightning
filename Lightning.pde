@@ -84,7 +84,7 @@ void draw() {
   
   //Lightning!
     stroke(41,171,226);
-    strokeWeight(50);
+    strokeWeight(15);
     if (left) {
       go = xs1 < limit;
     } else {
